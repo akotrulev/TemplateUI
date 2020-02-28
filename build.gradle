@@ -1,0 +1,39 @@
+plugins {
+    id 'java'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+test {
+    useTestNG()
+    systemProperties System.getProperties()
+}
+
+//Run using
+//java -jar <jar name> -testjar <jar name> -xmlpathinjar <test suite name>
+task fatJar(type: Jar) {
+    manifest {
+        attributes 'Main-Class': ' org.testng.TestNG'
+    }
+    classifier = 'tests'
+    from sourceSets.test.output+sourceSets.test.allSource
+    baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+
+dependencies {
+    compile group: 'org.testng', name: 'testng', version: '7.0.0'
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.141.59'
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-api', version: '3.141.59'
+    compile group: 'io.cucumber', name: 'cucumber-java', version: '5.3.0'
+    compile group: 'io.cucumber', name: 'cucumber-testng', version: '5.3.0'
+    compile group: 'io.cucumber', name: 'cucumber-picocontainer', version: '5.3.0'
+}
