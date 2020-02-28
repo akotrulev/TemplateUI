@@ -1,4 +1,4 @@
-package helper;
+package utility;
 
 import org.testng.Reporter;
 import org.testng.asserts.SoftAssert;
