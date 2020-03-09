@@ -17,18 +17,21 @@ public class Browser {
 
     protected WebDriver webDriver;
     protected WebDriverWait webDriverWait;
+
     public WebDriver getWebDriver() {
         return webDriver;
     }
 
+    //TODO move this to BaseTest ???
+    private String baseURL = System.getProperty("baseUrl");
+
     public Browser(WebDriver webDriver) {
         this.webDriver = webDriver;
         this.webDriverWait = new WebDriverWait(webDriver, 15, 50);
+        if (baseURL.isEmpty() || baseURL.isBlank()) {
+            baseURL = "http://10.0.4.200:3000";
+        }
     }
-
-    //TODO add logic for this to be parsed through -D param
-    //TODO move this to BaseTest ???
-    protected static final String baseURL = "http://10.0.4.200:3000";
 
     public void navigateToURL(String url) {
         Reporter.log("Opening " + baseURL + url);
@@ -93,7 +96,7 @@ public class Browser {
         webDriverWait.until(ExpectedConditions.presenceOfElementLocated(locator));
     }
 
-    public void waitForElement(WebElement webElement){
+    public void waitForElement(WebElement webElement) {
         waitForJs();
         WebDriverWait webDriverWait = new WebDriverWait(webDriver, 15, 50);
         webDriverWait.until(ExpectedConditions.visibilityOf(webElement));
