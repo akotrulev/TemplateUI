@@ -1,11 +1,14 @@
 package utility;
 
 import org.openqa.selenium.*;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Reporter;
 
+import java.net.URL;
 import java.util.List;
 
 /**
@@ -15,22 +18,31 @@ import java.util.List;
  */
 public class Browser {
 
+    private String baseURL;
+
     protected WebDriver webDriver;
     protected WebDriverWait webDriverWait;
+
+    public static WebDriver createDriver() {
+        // Get the browser type specified in system properties
+        BrowserTypeEnum browserTypeEnum = BrowserTypeEnum.valueOf(System.getProperty(SystemPropertyNames.BROWSER_TYPE));
+
+        // Set the needed system property of the specific browser
+        System.setProperty(browserTypeEnum.getProperty(), browserTypeEnum.getPath());
+
+        // Return the needed instance for the specific browser
+        return browserTypeEnum.getRemoteWebDriver().get();
+    }
+
 
     public WebDriver getWebDriver() {
         return webDriver;
     }
 
-    //TODO move this to BaseTest ???
-    private String baseURL = System.getProperty("baseUrl");
-
     public Browser(WebDriver webDriver) {
         this.webDriver = webDriver;
         this.webDriverWait = new WebDriverWait(webDriver, 15, 50);
-        if (baseURL.isEmpty() || baseURL.isBlank()) {
-            baseURL = "http://10.0.4.200:3000";
-        }
+        this.baseURL = System.getProperty(SystemPropertyNames.BASE_URL);
     }
 
     public void navigateToURL(String url) {
