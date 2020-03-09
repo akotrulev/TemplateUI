@@ -1,4 +1,4 @@
-package utility;
+package utility.constant;
 
 public class SystemPropertyNames {
     public final static String BASE_URL = "baseUrl";

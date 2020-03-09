@@ -1,4 +1,4 @@
-package utility;
+package utility.enumeration;
 
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;

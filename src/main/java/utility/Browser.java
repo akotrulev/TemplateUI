@@ -1,14 +1,13 @@
 package utility;
 
 import org.openqa.selenium.*;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Reporter;
+import utility.constant.SystemPropertyNames;
+import utility.enumeration.BrowserTypeEnum;
 
-import java.net.URL;
 import java.util.List;
 
 /**
@@ -30,10 +29,12 @@ public class Browser {
         // Set the needed system property of the specific browser
         System.setProperty(browserTypeEnum.getProperty(), browserTypeEnum.getPath());
 
-        // Return the needed instance for the specific browser
-        return browserTypeEnum.getRemoteWebDriver().get();
-    }
+        // Create the needed instance for the specific browser
+        WebDriver webDriver = browserTypeEnum.getRemoteWebDriver().get();
+        webDriver.manage().window().maximize();
 
+        return webDriver;
+    }
 
     public WebDriver getWebDriver() {
         return webDriver;
