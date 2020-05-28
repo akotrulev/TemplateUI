@@ -6,6 +6,6 @@ import pageobject.ExamplePageObject;
 public class ExampleTestNgTest extends BaseTest {
     @Test
     public void createWebDriver() {
-        ExamplePageObject examplePageObject = new ExamplePageObject(webDriverQueue.poll());
+        ExamplePageObject examplePageObject = new ExamplePageObject(webDriverQueue.pullElementAndAddItAtTheEnd());
     }
 }

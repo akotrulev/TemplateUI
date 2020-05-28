@@ -11,7 +11,7 @@ import utility.enumeration.BrowserTypeEnum;
 import java.util.Queue;
 
 public class BaseTest {
-    protected Queue<WebDriver> webDriverQueue;
+    protected CustomQueue<WebDriver> webDriverQueue;
 
     @BeforeSuite
     public void createWebDrivers(ITestContext iTestContext) {
