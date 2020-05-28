@@ -36,4 +36,6 @@ dependencies {
     compile group: 'io.cucumber', name: 'cucumber-java', version: '5.3.0'
     compile group: 'io.cucumber', name: 'cucumber-testng', version: '5.3.0'
     compile group: 'io.cucumber', name: 'cucumber-picocontainer', version: '5.3.0'
+    compile group: 'com.aventstack', name: 'extentreports-testng-adapter', version: '1.0.2'
+    compile group: 'com.aventstack', name: 'extentreports', version: '4.0.1'
 }
